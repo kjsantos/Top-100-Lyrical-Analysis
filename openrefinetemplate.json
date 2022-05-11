@@ -1,0 +1,85 @@
+[
+    {
+        "columnName": "lyrics",
+        "description": "Split column lyrics by separator",
+        "engineConfig": {
+            "facets": [],
+            "mode": "row-based"
+        },
+        "guessCellType": true,
+        "maxColumns": 2,
+        "mode": "separator",
+        "op": "core/column-split",
+        "regex": false,
+        "removeOriginalColumn": false,
+        "separator": "["
+    },
+    {
+        "columnName": "lyrics 2",
+        "description": "Text transform on cells in column lyrics 2 using expression grel:\"[\" + value",
+        "engineConfig": {
+            "facets": [],
+            "mode": "row-based"
+        },
+        "expression": "grel:\"[\" + value",
+        "onError": "keep-original",
+        "op": "core/text-transform",
+        "repeat": false,
+        "repeatCount": 10
+    },
+    {
+        "columnName": "lyrics",
+        "description": "Remove column lyrics",
+        "op": "core/column-removal"
+    },
+    {
+        "columnName": "lyrics 1",
+        "description": "Remove column lyrics 1",
+        "op": "core/column-removal"
+    },
+    {
+        "columnName": "lyrics 2",
+        "description": "Text transform on cells in column lyrics 2 using expression value.replace(/\\s+/,' ')",
+        "engineConfig": {
+            "facets": [],
+            "mode": "row-based"
+        },
+        "expression": "value.replace(/\\s+/,' ')",
+        "onError": "keep-original",
+        "op": "core/text-transform",
+        "repeat": false,
+        "repeatCount": 10
+    },
+    {
+        "columnName": "lyrics 2",
+        "description": "Text transform on cells in column lyrics 2 using expression value.unescape('html')",
+        "engineConfig": {
+            "facets": [],
+            "mode": "row-based"
+        },
+        "expression": "value.unescape('html')",
+        "onError": "keep-original",
+        "op": "core/text-transform",
+        "repeat": true,
+        "repeatCount": 10
+    },
+    {
+        "description": "Rename column lyrics 2 to lyrics",
+        "newColumnName": "lyrics",
+        "oldColumnName": "lyrics 2",
+        "op": "core/column-rename"
+    },
+    {
+        "columnName": "lyrics",
+        "description": "Text transform on cells in column lyrics using expression value.replace(/[‘’‚‛‹›‚]/,\"\\'\").replace(/[“”«»„]/,\"\\\"\")",
+        "engineConfig": {
+            "facets": [],
+            "mode": "row-based"
+        },
+        "expression": "value.replace(/[‘’‚‛‹›‚]/,\"\\'\").replace(/[“”«»„]/,\"\\\"\")",
+        "onError": "keep-original",
+        "op": "core/text-transform",
+        "repeat": false,
+        "repeatCount": 10
+    }
+]
